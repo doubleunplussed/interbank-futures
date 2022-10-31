@@ -5,4 +5,4 @@ Description=Timer for IB
 OnCalendar=*-*-* 0,5,10,15,20:00:00
 
 [Install]
-WantedBy=ib.target
+WantedBy=timers.target
