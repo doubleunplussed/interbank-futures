@@ -49,7 +49,10 @@ I'm publishing this code as-is for those who are curious, but it was written wit
 intention of being easy to use for others, hence why many settings are just made by
 editing the code directly.
 
-The python scripts can be run with any recent Python interpreter as `python
+The python scripts can be run with any recent version of Python as `python
 <scriptname>.py`. Most require only the `numpy`, `matplotlib`, and `pandas` packages.
 
-`extract.py` also requires `PyPDF3`, and calls several linux tools on the command line, including `tesseract`, `imagemagick`, and `pdfimages`. As such it only works on Linux.
+`extract.py` also requires the `PyPDF3` Python package, and calls several linux tools on
+the command line, including `tesseract`, `imagemagick`. You can install these on Linux
+with `sudo apt install imagemagick tesseract-ocr`. If you're not on Linux, you're on
+your own.

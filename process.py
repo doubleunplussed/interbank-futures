@@ -45,7 +45,7 @@ def prepend_prev_month(rates):
     month = list(rates.keys())[0]
     prev_month = get_prev_month(month)
     prev_month_avrate = [d for d in data.values() if prev_month in d][-1][prev_month]
-    return {prev_month: prev_month_avrate} | rates
+    return {prev_month: prev_month_avrate, **rates}
 
 
 actual_cash_rate = {
