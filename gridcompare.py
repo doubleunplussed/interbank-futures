@@ -54,6 +54,7 @@ actual_cash_rate = {
     'Aug-22': 1.85,
     'Sep-22': 2.35,
     'Oct-22': 2.60,
+    'Nov-22': 2.85,
 }
 
 MONTHS = ['Nov-22', 'Dec-22', 'Feb-23', 'Mar-23']
