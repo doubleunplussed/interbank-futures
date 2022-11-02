@@ -2,6 +2,6 @@
 Description=download interbank futures PDF
 
 [Service]
-ExecStart=/home/dup/interbank-future/download.sh
+ExecStart=/home/dup/interbank-futures/download.sh
 WorkingDirectory=/home/dup/interbank-futures
 User=dup
