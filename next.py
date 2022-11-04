@@ -46,7 +46,7 @@ actual_cash_rate = {
     'Oct-22': 2.60,
 }
 
-MONTHS = ['Nov-22', 'Dec-22', 'Feb-23', 'Mar-23']
+MONTHS = ['Dec-22', 'Feb-23', 'Mar-23']
 # MONTHS = month_keys[1:10]
 
 for i, month in enumerate(MONTHS):
