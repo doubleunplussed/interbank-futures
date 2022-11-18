@@ -45,6 +45,30 @@ def get_forward_rate_data():
     return np.array(dates), np.array(maxrates)
 
 
+def get_bond_yields():
+    url = "https://www.rba.gov.au/statistics/tables/csv/f2-data.csv"
+
+    df = (
+        pd.read_csv(
+            url,
+            encoding='WINDOWS-1252',
+            skiprows=[0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            # storage_options=curl_headers,
+        )
+        .dropna(axis=0, how='all')
+        .dropna(axis=1, how='all')
+    )
+
+    dates = []
+    for _, row in df.iterrows():
+        date = np.datetime64(datetime.strptime(row[0], '%d-%b-%Y'), 'D')
+        dates.append(date)
+
+    rates = df['Australian Government 2 year bond']
+    return np.array(dates), np.array(rates)
+
+
+
 munits.registry[np.datetime64] = mdates.ConciseDateConverter()
 
 data = json.loads(Path('processed_data.json').read_text('utf8'))
@@ -61,11 +85,18 @@ ois_dates, ois_terminal_rates = get_forward_rate_data()
 ois_dates = np.append(ois_dates, [ois_dates[-1] + 1])
 ois_terminal_rates = np.append(ois_terminal_rates, [ois_terminal_rates[-1]])
 
+bond_dates, bond_yields = get_bond_yields()
+bond_dates = np.append(bond_dates, [bond_dates[-1] + 1])
+bond_yields = np.append(bond_yields, [bond_yields[-1]])
+
+
 plt.step(dates, terminal_rates, where='post', label="Interbank futures")
 plt.step(ois_dates, ois_terminal_rates, where='post', label="Overnight-indexed swaps")
+plt.step(bond_dates, bond_yields, where='post', label="2Y bond yield")
+
 plt.grid(True, color='k', linestyle=':', alpha=0.5)
 plt.title("Market-implied terminal rate")
 plt.ylabel("Rate (%)")
 plt.legend()
-plt.axis(xmin=np.datetime64('2022-05-15'), xmax=dates[-1] + 30, ymin=2.5, ymax=4.5)
+plt.axis(xmin=np.datetime64('2022-05-15'), xmax=dates[-1] + 180, ymin=2.0, ymax=5.0)
 plt.show()
