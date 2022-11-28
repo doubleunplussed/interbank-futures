@@ -90,9 +90,24 @@ bond_dates = np.append(bond_dates, [bond_dates[-1] + 1])
 bond_yields = np.append(bond_yields, [bond_yields[-1]])
 
 
-plt.step(dates, terminal_rates, where='post', label="Interbank futures")
-plt.step(ois_dates, ois_terminal_rates, where='post', label="Overnight-indexed swaps")
-plt.step(bond_dates, bond_yields, where='post', label="2Y bond yield")
+plt.step(
+    dates,
+    terminal_rates,
+    where='post',
+    label=f"Interbank futures ({terminal_rates[-1]:.2f}%)",
+)
+plt.step(
+    ois_dates,
+    ois_terminal_rates,
+    where='post',
+    label=f"Overnight-indexed swaps ({ois_terminal_rates[-1]:.2f}%)",
+)
+plt.step(
+    bond_dates,
+    bond_yields,
+    where='post',
+    label=f"2Y bond yield ({bond_yields[-1]:.2f}%)",
+)
 
 plt.grid(True, color='k', linestyle=':', alpha=0.5)
 plt.title("Market-implied terminal rate")
