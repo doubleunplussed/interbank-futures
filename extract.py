@@ -75,7 +75,7 @@ except FileNotFoundError:
 
 for f in sorted(Path('pdfs').iterdir(), key=lambda s: -os.stat(s).st_mtime):
     s = extract_text(f)
-    date = re.search(r'(\d{1,2})(?:st|nd|rd|th) ([A-Z][a-z]+) (\d{4})', s).groups()
+    date = re.search(r'(\d{1,2})(?:|st|nd|rd|th) ([A-Z][a-z]+) (\d{4})', s).groups()
     date = datetime.strptime('-'.join(date), '%d-%B-%Y').strftime('%Y-%m-%d')
     print(f'{f.name}')
     if date not in pdfdata:
