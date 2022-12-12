@@ -13,7 +13,7 @@ data = json.loads(Path('processed_data.json').read_text('utf8'))
 
 dates = list(data.keys())[11:]
 
-dates = [
+# dates = [
     # '2022-11-02',
     # '2022-11-21',
     # '2022-11-22',
@@ -25,9 +25,12 @@ dates = [
     # '2022-11-30',
     # '2022-12-01',
     # '2022-12-02',
-    '2022-12-05',
-    '2022-12-06',
-]
+    # '2022-12-05',
+    # '2022-12-06',
+# ]
+
+dates = dates[-4:]
+print(dates)
 
 keys = [
     # 'Jun-22',
