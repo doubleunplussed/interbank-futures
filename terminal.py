@@ -61,6 +61,8 @@ def get_bond_yields():
 
     dates = []
     for _, row in df.iterrows():
+        if row[0] == '44929':
+            row[0] = '03-Jan-2023'
         date = np.datetime64(datetime.strptime(row[0], '%d-%b-%Y'), 'D')
         dates.append(date)
 

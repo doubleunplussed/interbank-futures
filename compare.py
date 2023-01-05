@@ -29,7 +29,7 @@ dates = list(data.keys())[11:]
     # '2022-12-06',
 # ]
 
-dates = dates[-4:]
+dates = dates[-8:]
 print(dates)
 
 keys = [
@@ -39,7 +39,7 @@ keys = [
     # 'Sep-22',
     # 'Oct-22',
     # 'Nov-22',
-    'Dec-22',
+    # 'Dec-22',
     'Jan-23',
     'Feb-23',
     'Mar-23',
