@@ -11,7 +11,10 @@ munits.registry[np.datetime64] = mdates.ConciseDateConverter()
 
 data = json.loads(Path('processed_data.json').read_text('utf8'))
 
-dates = list(data.keys())[11:]
+dates = list(data.keys())
+
+dates = [dates[-30], dates[-7], dates[-2], dates[-1]]
+
 
 # dates = [
     # '2022-11-02',
@@ -27,10 +30,7 @@ dates = list(data.keys())[11:]
     # '2022-12-02',
     # '2022-12-05',
     # '2022-12-06',
-# ]
 
-dates = dates[-8:]
-print(dates)
 
 keys = [
     # 'Jun-22',
