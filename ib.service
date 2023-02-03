@@ -1,7 +1,7 @@
 [Unit]
-Description=download interbank futures PDF
+Description=download interbank futures PDF and update git repo
 
 [Service]
-ExecStart=/home/dup/interbank-futures/download.sh
+ExecStart=/home/dup/interbank-futures/update.sh
 WorkingDirectory=/home/dup/interbank-futures
 User=dup
