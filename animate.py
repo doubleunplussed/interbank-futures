@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from subprocess import check_call
 
 import numpy as np
 
@@ -80,7 +81,7 @@ for i, date in enumerate(data):
 
     plt.plot(
         [a.replace('-', '\n') for a in actual_cash_rate.keys()],
-        actual_cash_rate.values(),
+        list(actual_cash_rate.values()),
         'o-',
         label='Actual cash rate target',
         color='C1',
@@ -98,4 +99,14 @@ for i, date in enumerate(data):
     plt.clf()
     print(i)
 
-# convert plots/*.png animate.gif
+# convert to gif
+check_call(
+    ['convert']
+    + [outdir / f'{j:04d}.png' for j in range(len(data))]
+    + [
+        '-delay',
+        '500',
+        outdir / f'{len(data) - 1:04d}.png',
+        'animated.gif',
+    ]
+)
