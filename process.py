@@ -19,7 +19,7 @@ def get_n_days(month):
 def get_decision_day(month):
     """Return the day of the first Tuesday of the month"""
     d = datetime.strptime(month, '%b-%y')
-    return (7 - d.weekday() + 1) % 7 + 1
+    return (1 - d.weekday()) % 7 + 1
 
 
 def get_prev_month(month):
@@ -79,7 +79,7 @@ for date, rates in data.items():
 
     delta = avrate - f_this_month * prev_target - (1 - f_this_month) * current_target
 
-    print(delta)
+    # print(delta)
     
     processed_rates[month] = current_target
 
