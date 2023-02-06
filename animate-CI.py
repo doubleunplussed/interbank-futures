@@ -20,7 +20,7 @@ outdir.mkdir(exist_ok=True)
 def get_decision_day(month):
     """Return the day of the first Tuesday of the month"""
     d = datetime.strptime(month, '%b-%y')
-    return d.replace(day=(2 - d.weekday()) % 7 or 6)
+    return d.replace(day=(1 - d.weekday()) % 7 + 1)
 
 
 def before_decision_day(date, month):

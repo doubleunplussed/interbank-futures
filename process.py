@@ -48,6 +48,10 @@ def prepend_prev_month(rates):
     return {prev_month: prev_month_avrate, **rates}
 
 
+def get_month(date):
+    """Return the month string (e.g. Feb-22) corresponding to a date string"""
+    return datetime.strptime(date, '%Y-%m-%d').strftime('%b-%y')
+
 actual_cash_rate = {
     'Mar-22': 0.1,
     'Apr-22': 0.1,
@@ -65,7 +69,7 @@ actual_cash_rate = {
 data = json.loads(Path('pdfdata.json').read_text('utf8'))
 processed_data = {}
 for date, rates in data.items():
-    if before_decision_day(date):
+    if before_decision_day(date) or get_month(date) not in rates:
         rates = prepend_prev_month(rates)
     processed_rates = {}
 
@@ -91,5 +95,7 @@ for date, rates in data.items():
         processed_rates[month] = round(rate - delta, 3)
 
     processed_data[date] = processed_rates
+
+
 
 Path('processed_data.json').write_text(json.dumps(processed_data, indent=4), 'utf8')
