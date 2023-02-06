@@ -19,7 +19,7 @@ def get_n_days(month):
 def get_decision_day(month):
     """Return the day of the first Tuesday of the month"""
     d = datetime.strptime(month, '%b-%y')
-    return (2 - d.weekday()) % 7 or 6
+    return (7 - d.weekday() + 1) % 7 + 1
 
 
 def get_prev_month(month):
