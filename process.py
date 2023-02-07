@@ -64,6 +64,7 @@ actual_cash_rate = {
     'Nov-22': 2.85,
     'Dec-22': 3.10,
     'Jan-23': 3.10,
+    'Feb-23': 3.35,
 }
 
 data = json.loads(Path('pdfdata.json').read_text('utf8'))
