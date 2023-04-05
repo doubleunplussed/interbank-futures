@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from subprocess import check_call
 from datetime import datetime
+import calendar
 
 import numpy as np
 
@@ -27,6 +28,16 @@ def before_decision_day(date, month):
     """Return whether a date is before interest rate decision day in the given month"""
     d = datetime.strptime(date, '%Y-%m-%d')
     return d < get_decision_day(month)
+
+def date2num(date):
+    date = np.datetime64(date)
+    # how many months since start of data?
+    n_months = (date.astype('datetime64[M]') - np.datetime64('2022-04')).astype(int)
+    # what fraction of the month are we through?
+    dt = date.astype(datetime)
+    n_days_in_month = calendar.monthrange(dt.year, dt.month)[1]
+    fraction_of_month = dt.day / n_days_in_month
+    return n_months + fraction_of_month
 
 
 months = [
@@ -73,6 +84,8 @@ actual_cash_rate = {
     'Dec-22': 3.10,
     'Jan-23': 3.10,
     'Feb-23': 3.35,
+    'Mar-23': 3.60,
+    'Apr-23': 3.60,
 }
 
 
@@ -105,9 +118,10 @@ for i, date in enumerate(data):
         upper,
         color='k',
         alpha=0.3,
-        label="Interbank futures interquartile range",
+        label=f"Interbank futures interquartile range as of {date}",
         linewidth=0,
     )
+    plt.axvline(date2num(date), color='k', linestyle='--')
 
     y = list(data[date].values())
 

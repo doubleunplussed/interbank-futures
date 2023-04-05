@@ -47,9 +47,11 @@ actual_cash_rate = {
     'Nov-22': 2.85,
     'Dec-22': 3.10,
     'Feb-23': 3.35,
+    'Mar-23': 3.60,
+    'Apr-23': 3.60,
 }
 
-MONTHS = ['Feb-23', 'Mar-23', 'Apr-23']
+MONTHS = ['May-23', 'Jun-23']
 # MONTHS = month_keys[1:10]
 
 for i, month in enumerate(MONTHS):
@@ -66,28 +68,6 @@ for i, month in enumerate(MONTHS):
             for v in data.values()
         ]
     )
-
-#         next_month_rate = np.array([v['Nov-22'] for v in data.values()])
-# for i, month in enumerate(['November', 'December', 'February', 'March']):
-#     if month == 'November':
-#         this_month_rate = np.array([v.get('Oct-22') for v in data.values()])
-#         next_month_rate = np.array([v['Nov-22'] for v in data.values()])
-#     elif month == 'December':
-#         this_month_rate = np.array([v.get('Nov-22') for v in data.values()])
-#         next_month_rate = np.array([v['Dec-22'] for v in data.values()])
-#     elif month == 'January':
-#         this_month_rate = np.array([v.get('Dec-22') for v in data.values()])
-#         next_month_rate = np.array([v['Jan-23'] for v in data.values()])
-#     elif month == 'February':
-#         this_month_rate = np.array([v.get('Jan-23') for v in data.values()])
-#         next_month_rate = np.array([v['Feb-23'] for v in data.values()])
-#     elif month == 'March':
-#         this_month_rate = np.array([v.get('Feb-23') for v in data.values()])
-#         next_month_rate = np.array([v['Mar-23'] for v in data.values()])
-
-    # dates = np.append(dates, [dates[-1] + 1])
-    # this_month_avrate = np.append(this_month_avrate, [100 - 97.790])
-    # next_month_avrate = np.append(next_month_avrate, [100 - 97.420])
 
     start = np.datetime64('2022-06-08')
     this_month_rate = this_month_rate[all_dates >= start]

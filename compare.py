@@ -13,7 +13,16 @@ data = json.loads(Path('processed_data.json').read_text('utf8'))
 
 dates = list(data.keys())
 
-dates = [dates[-30], dates[-7], dates[-2], dates[-1]]
+dates = [
+    # dates[-30],
+    # dates[-7],
+    # dates[-6],
+    # dates[-5],
+    # dates[-4],
+    # dates[-3],
+    dates[-2],
+    dates[-1],
+]
 
 
 # dates = [
@@ -40,9 +49,9 @@ keys = [
     # 'Oct-22',
     # 'Nov-22',
     # 'Dec-22',
-    'Jan-23',
-    'Feb-23',
-    'Mar-23',
+    # 'Jan-23',
+    # 'Feb-23',
+    # 'Mar-23',
     'Apr-23',
     'May-23',
     'Jun-23',
@@ -55,6 +64,7 @@ keys = [
     'Jan-24',
     'Feb-24',
     'Mar-24',
+    'Apr-24',
 ]
 
 months = [m.split('-')[0] for m in keys]
@@ -68,13 +78,13 @@ ALL = False
 for i, date in enumerate(dates):
     y = list(data[date][k] for k in keys)
     if not ALL:
-        label = f"Market forecast as of {date}"
+        label = f"Market pricing as of {date}"
         color = None
     elif date == dates[0]:
-        label = 'Previous market forecasts'
+        label = 'Previous market pricing'
         color = 'C0'
     elif date == dates[-1]:
-        label = "Current market forecast"
+        label = "Current market pricing"
         color = 'C1'
     else:
         label = None
@@ -92,7 +102,7 @@ for i, date in enumerate(dates):
 plt.gca().set_xticks(x, months)
 
 plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.1))
-plt.axis(ymin=2.5, xmin=-0.8, xmax=len(months) - 0.5)
+plt.axis(ymin=3.0, ymax=4.0, xmin=-0.8, xmax=len(months) - 0.5)
 plt.grid(True, axis='y', color='k', alpha=0.25)
 plt.ylabel("Market-implied rate (%)")
 plt.legend(loc='upper left')

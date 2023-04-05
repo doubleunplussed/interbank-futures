@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 from subprocess import check_call
+from datetime import datetime
+import calendar
 
 import numpy as np
 
@@ -9,6 +11,18 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 munits.registry[np.datetime64] = mdates.ConciseDateConverter()
+
+
+def date2num(date):
+    date = np.datetime64(date)
+    # how many months since start of data?
+    n_months = (date.astype('datetime64[M]') - np.datetime64('2022-04')).astype(int)
+    # what fraction of the month are we through?
+    dt = date.astype(datetime)
+    n_days_in_month = calendar.monthrange(dt.year, dt.month)[1]
+    fraction_of_month = dt.day / n_days_in_month
+    return n_months + fraction_of_month
+
 
 data = json.loads(Path('processed_data.json').read_text('utf8'))
 
@@ -59,8 +73,13 @@ actual_cash_rate = {
     'Dec-22': 3.10,
     'Jan-23': 3.10,
     'Feb-23': 3.35,
+    'Mar-23': 3.60,
+    'Apr-23': 3.60,
 }
 
+
+# We're not interested in current-month data, delete it:
+data = {d: {m: r for m, r in list(rates.items())[1:]} for d, rates in data.items()}
 
 # Pad data with NaNs:
 padded_data = data.copy()
@@ -88,6 +107,7 @@ for i, date in enumerate(data):
         color='C1',
     )
     plt.plot(labels, y, 'ko-', label=f"Interbank futures as of {date}")
+    plt.axvline(date2num(date), color='k', linestyle='--')
 
     plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.2))
     plt.axis(ymin=0, ymax=4.5, xmin=labels[0], xmax=labels[-1])
