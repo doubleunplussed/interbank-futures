@@ -92,7 +92,7 @@ for date, rates in data.items():
 
     for month, avrate in list(rates.items())[1:]:
         prev_month = get_prev_month(month)
-        prev_avrate = processed_rates[prev_month] - delta
+        prev_avrate = processed_rates[prev_month] + delta
         f_this_month = get_decision_day(month) / get_n_days(month)
         rate = (avrate - f_this_month * prev_avrate) / (1 - f_this_month)
         processed_rates[month] = round(rate - delta, 3)

@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+import requests
 import numpy as np
 import pandas as pd
 
@@ -13,18 +14,20 @@ import matplotlib.pyplot as plt
 
 
 def get_forward_rate_data():
-    url = "https://www.rba.gov.au/statistics/tables/csv/f17-forward-rates.csv"
-    # url = "f17-forward-rates.csv"
-
-    # HTTP headers to emulate curl
-    curl_headers = {'user-agent': 'curl/7.64.1'}
     
+    FILE = Path('f17-forward-rates.csv')
+    try:
+        url = "https://www.rba.gov.au/statistics/tables/csv/f17-forward-rates.csv"
+        data = requests.get(url).content
+        FILE.write_bytes(data)
+    except requests.exceptions.ConnectionError:
+        print("Silly RBA with their 30 second DNS TTL...")
+
     df = (
         pd.read_csv(
-            url,
+            FILE,
             encoding='WINDOWS-1252',
             skiprows=[0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            # storage_options=curl_headers,
         )
         .dropna(axis=0, how='all')
         .dropna(axis=1, how='all')
@@ -46,14 +49,21 @@ def get_forward_rate_data():
 
 
 def get_bond_yields():
-    url = "https://www.rba.gov.au/statistics/tables/csv/f2-data.csv"
+
+    FILE = Path('f2-data.csv')
+    try:
+        url = "https://www.rba.gov.au/statistics/tables/csv/f2-data.csv"
+        data = requests.get(url).content
+        FILE.write_bytes(data)
+    except requests.exceptions.ConnectionError:
+        print("Silly RBA with their 30 second DNS TTL...")
+    
 
     df = (
         pd.read_csv(
-            url,
+            FILE,
             encoding='WINDOWS-1252',
             skiprows=[0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            # storage_options=curl_headers,
         )
         .dropna(axis=0, how='all')
         .dropna(axis=1, how='all')
