@@ -37,6 +37,8 @@ actual_cash_rate = {
     'Dec-22': 3.10,
     # 'Jan-23': 3.10,
     'Feb-23': 3.35,
+    'Mar-23': 3.60,
+    'Apr-23': 3.60,
 }
 
 forecast_cash_rate = {}
@@ -66,7 +68,7 @@ prob_of_outcome = {
 
 
 bins = np.array([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
-bins = np.array([0.0, 0.25, 0.5, 0.75, 1.0])
+# bins = np.array([0.0, 0.25, 0.5, 0.75, 1.0])
 
 binlabels = ['0–25%', '25–50%', '50–75%', '75–100%']
 binlabels = [f"{100 * a:.0f}–{100 * b:.0f}%" for a, b in zip(bins[:-1], bins[1:])]
