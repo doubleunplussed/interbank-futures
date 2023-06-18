@@ -49,19 +49,22 @@ actual_cash_rate = {
     'Feb-23': 3.35,
     'Mar-23': 3.60,
     'Apr-23': 3.60,
+    'May-23': 3.85,
+    'Jun-23': 4.10,
 }
 
-MONTHS = ['May-23', 'Jun-23']
+MONTHS = ['Jun-23', 'Jul-23', 'Aug-23', 'Sep-23', 'Oct-23', 'Nov-23']
 # MONTHS = month_keys[1:10]
 
 for i, month in enumerate(MONTHS):
-    this_month = month_keys[month_keys.index(month) - 1]
-    this_month_rate = np.array(
-        [
-            v.get(this_month, actual_cash_rate.get(this_month, np.nan))
-            for v in data.values()
-        ]
-    )
+    #this_month = month_keys[month_keys.index(month) - 1]
+    #this_month_rate = np.array(
+    #    [
+    #        v.get(this_month, actual_cash_rate.get(this_month, np.nan))
+    #        for v in data.values()
+    #    ]
+    #)
+    this_month_rate = list(actual_cash_rate.values())[-1]
     next_month_rate = np.array(
         [
             v.get(month, actual_cash_rate.get(month, np.nan))
@@ -70,7 +73,7 @@ for i, month in enumerate(MONTHS):
     )
 
     start = np.datetime64('2022-06-08')
-    this_month_rate = this_month_rate[all_dates >= start]
+    #this_month_rate = this_month_rate[all_dates >= start]
     next_month_rate = next_month_rate[all_dates >= start]
     dates = all_dates[all_dates >= start]
 
@@ -98,14 +101,14 @@ for i, month in enumerate(MONTHS):
     # plt.subplot(3, 3, i + 1)
     plt.step(
         alldates,
-        100 * allhikes,
+        100 * allhikes / 0.25,
         where='post',
         label=f"{month}",
         color=f"C{i}",
     )
     plt.grid(True, color='k', linestyle=':', alpha=0.5)
     plt.title(f'Market expectation of {month} rate hike')
-    plt.axis(ymin=0, ymax=65)
+    plt.axis(ymin=-10, ymax=20)
     plt.gca().yaxis.set_major_locator(plt.MultipleLocator(10))
     plt.legend()
 
@@ -125,7 +128,7 @@ for i, month in enumerate(MONTHS):
     #     labelleft=ylabels_visible,
     # )
 
-    plt.ylabel('E(hike) (bps)')
+    plt.ylabel('fraciton of 25bps priced (%)')
 
 # plt.subplots_adjust(
 #     left=0.1,

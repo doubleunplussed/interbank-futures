@@ -32,16 +32,16 @@ month_keys = [
     'Mar-23',
     'Apr-23',
     'May-23',
-    'Jun-23',
-    'Jul-23',
-    'Aug-23',
-    'Sep-23',
-    'Oct-23',
-    'Nov-23',
-    'Dec-23',
-    'Feb-24',
-    'Mar-24',
-    'Apr-24',
+    # 'Jun-23',
+    # 'Jul-23',
+    # 'Aug-23',
+    # 'Sep-23',
+    # 'Oct-23',
+    # 'Nov-23',
+    # 'Dec-23',
+    # 'Feb-24',
+    # 'Mar-24',
+    # 'Apr-24',
     # 'May-24',
 ]
 
@@ -59,6 +59,7 @@ actual_cash_rate = {
     'Feb-23': 3.35,
     'Mar-23': 3.60,
     'Apr-23': 3.60,
+    'May-23': 3.85,
 }
 
 MONTHS = ['Nov-22', 'Dec-22', 'Feb-23', 'Mar-23']
@@ -83,7 +84,10 @@ for i, month in enumerate(MONTHS):
     for d, r in zip(dates, rates):
         allrates[alldates>=d] = r
 
-    ax = plt.subplot(4, 5, i + 1)
+    NCOLS = 2
+    NROWS = 5
+
+    ax = plt.subplot(NROWS, NCOLS, i + 1)
     decision_day = get_decision_day(month)
     plt.step(
         alldates[alldates < decision_day],
@@ -112,8 +116,8 @@ for i, month in enumerate(MONTHS):
 
     plt.legend()
 
-    xlabels_visible = i in (15, 16, 17, 18, 19) 
-    ylabels_visible = i in (0, 5, 10, 15)
+    xlabels_visible = i in (8, 9)
+    ylabels_visible = i in (0, 2, 4, 6, 8)
 
     if ylabels_visible:
         plt.ylabel('implied rate (%)')

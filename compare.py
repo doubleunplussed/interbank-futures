@@ -52,8 +52,8 @@ keys = [
     # 'Jan-23',
     # 'Feb-23',
     # 'Mar-23',
-    'Apr-23',
-    'May-23',
+    # 'Apr-23',
+    # 'May-23',
     'Jun-23',
     'Jul-23',
     'Aug-23',
@@ -102,7 +102,7 @@ for i, date in enumerate(dates):
 plt.gca().set_xticks(x, months)
 
 plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.1))
-plt.axis(ymin=3.0, ymax=4.0, xmin=-0.8, xmax=len(months) - 0.5)
+plt.axis(ymin=3.0, ymax=4.5, xmin=-0.8, xmax=len(months) - 0.5)
 plt.grid(True, axis='y', color='k', alpha=0.25)
 plt.ylabel("Market-implied rate (%)")
 plt.legend(loc='upper left')
