@@ -4,7 +4,7 @@ from datetime import datetime
 import calendar
 
 # This script converts the calendar month market expectations of the overnight cash rate
-# contained in pdfdata.json into expectations of the cash rate *target* after each
+# contained in raw_data.json into expectations of the cash rate *target* after each
 # month's RBA interest rate decision, and saves the results to processed_data.json. This
 # corrects both for the fact that inter-meeting periods do not align with calendar
 # months, and that the overnight cash rate differs from the target by some amount - the
@@ -69,9 +69,10 @@ actual_cash_rate = {
     'Apr-23': 3.60,
     'May-23': 3.85,
     'Jun-23': 4.10,
+    'Jul-23': 4.10,
 }
 
-data = json.loads(Path('pdfdata.json').read_text('utf8'))
+data = json.loads(Path('raw_data.json').read_text('utf8'))
 processed_data = {}
 for date, rates in data.items():
     if before_decision_day(date) or get_month(date) not in rates:
@@ -88,7 +89,7 @@ for date, rates in data.items():
 
     delta = avrate - f_this_month * prev_target - (1 - f_this_month) * current_target
 
-    # print(delta)
+    print(delta)
     
     processed_rates[month] = current_target
 

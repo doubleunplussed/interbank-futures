@@ -1,19 +1,18 @@
 #!/usr/bin/bash
 set -euo
 
-./download.sh
+python update.py
 
-# Check if there are any untracked files in the "pdfs" directory
-untracked_files=$(git status --porcelain --untracked-files -- pdfs | grep '??')
+# Check if there was new data
+new_data=$(git status --porcelain -- raw_data.json | grep ' M')
 
-if [ -n "$untracked_files" ]; then
-  python extract.py
+if [ -n "$new_data" ]; then
   python process.py
-  git add pdfs pdfdata.json processed_data.json
+  git add raw_data.json processed_data.json
   git commit -m "update"
-  git push
+  # git push
 else
-  echo "No new file downloaded. Exiting."
+  echo "No new data. Exiting."
   exit 0
 fi
 

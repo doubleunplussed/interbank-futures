@@ -1,5 +1,5 @@
 [Unit]
-Description=download interbank futures PDF and update git repo
+Description=download interbank futures data and update git repo
 
 [Service]
 ExecStart=/home/dup/interbank-futures/update.sh
