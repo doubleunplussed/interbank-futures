@@ -70,6 +70,7 @@ actual_cash_rate = {
     'May-23': 3.85,
     'Jun-23': 4.10,
     'Jul-23': 4.10,
+    'Aug-23': 4.10,
 }
 
 data = json.loads(Path('raw_data.json').read_text('utf8'))

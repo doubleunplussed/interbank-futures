@@ -54,8 +54,8 @@ keys = [
     # 'Mar-23',
     # 'Apr-23',
     # 'May-23',
-    'Jun-23',
-    'Jul-23',
+    # 'Jun-23',
+    # 'Jul-23',
     'Aug-23',
     'Sep-23',
     'Oct-23',
@@ -65,6 +65,9 @@ keys = [
     'Feb-24',
     'Mar-24',
     'Apr-24',
+    'May-24',
+    'Jun-24',
+    'Jul-24',
 ]
 
 months = [m.split('-')[0] for m in keys]

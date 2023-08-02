@@ -18,6 +18,10 @@ except FileNotFoundError:
     alldata = {}
 
 todaydata = json.loads(requests.get(URL).content)['data']
+
+items = todaydata['items']
+items.sort(key=lambda item: item['dateExpiry'])
+
 for item in todaydata['items']:
     month = datetime.fromisoformat(item['dateExpiry']).strftime('%b-%y')
     settlement_date = item['datePreviousSettlement']
