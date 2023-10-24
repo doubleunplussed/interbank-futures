@@ -30,5 +30,11 @@ for item in todaydata['items']:
     rate = float(f"{100 - item['pricePreviousSettlement']:.3f}")
     alldata[settlement_date][month] = rate
 
+# sort:
+sorted_data = {}
+for date in sorted(alldata):
+    sorted_data[date] = {}
+    for month in sorted(alldata[date], key=lambda d: datetime.strptime(d, '%b-%y')):
+        sorted_data[date][month] = alldata[date][month]
 
-DATAFILE.write_text(json.dumps(alldata, indent=4))
+DATAFILE.write_text(json.dumps(sorted_data, indent=4))
